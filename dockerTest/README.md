@@ -8,9 +8,6 @@ $ docker build -t iris-dockerization .
 # we have to match the port 9999 that is used in the script
 $ docker run -p 9999:9999 iris-dockerization
 
-# production mode
-$ npm run start:prod
-
 # test is it's working, on another terminal
 $ telnet 127.0.0.1 9999
 ```
