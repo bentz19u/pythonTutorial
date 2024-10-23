@@ -1,6 +1,7 @@
 from jovian.pythondsa import evaluate_test_case
 from dictionaries.tests import tests
 
+
 # We need to write a program to find the position of a given number in a list of numbers arranged in decreasing order.
 # We also need to minimize the number of times we access elements from the list.
 # This is the brute force solution
@@ -33,6 +34,7 @@ def locate_card(cards, searched_number):
             return -1
 
     return -1
+
 
 is_all_tests_succeed = True
 time_to_process = 0

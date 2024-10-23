@@ -1,6 +1,7 @@
 from jovian.pythondsa import evaluate_test_case
 from dictionaries.tests import tests
 
+
 # We need to write a program to find the position of a given number in a list of numbers arranged in decreasing order.
 # We also need to minimize the number of times we access elements from the list.
 
@@ -16,7 +17,7 @@ from dictionaries.tests import tests
 
 def test_location(cards, searched_number, mid):
     if cards[mid] == searched_number:
-        if mid-1 >= 0 and cards[mid-1] == searched_number:
+        if mid - 1 >= 0 and cards[mid - 1] == searched_number:
             return 'left'
         else:
             return 'found'
@@ -24,6 +25,7 @@ def test_location(cards, searched_number, mid):
         return 'left'
     else:
         return 'right'
+
 
 def locate_card(cards, searched_number):
     low, high = 0, len(cards) - 1
@@ -55,6 +57,7 @@ for test in tests:
 
 print(f"ALL TESTS SUCCEED? {is_all_tests_succeed}, time to process {time_to_process}")
 
+
 # ** automatically put the correct parameters from the dictionary
 # result = locate_card(**test['input']) == test['output']
 # print(result)
@@ -76,32 +79,38 @@ def binary_search(lo, hi, condition):
             lo = mid + 1
     return -1
 
+
 def first_position(nums, target):
     def condition(mid):
         if nums[mid] == target:
-            if mid > 0 and nums[mid-1] == target:
+            if mid > 0 and nums[mid - 1] == target:
                 return 'left'
             return 'found'
         elif nums[mid] < target:
             return 'left'
         else:
             return 'right'
-    return binary_search(0, len(nums)-1, condition)
+
+    return binary_search(0, len(nums) - 1, condition)
+
 
 def last_position(nums, target):
     def condition(mid):
         if nums[mid] == target:
-            if mid < len(nums)-1 and nums[mid+1] == target:
+            if mid < len(nums) - 1 and nums[mid + 1] == target:
                 return 'right'
             return 'found'
         elif nums[mid] < target:
             return 'left'
         else:
             return 'right'
-    return binary_search(0, len(nums)-1, condition)
+
+    return binary_search(0, len(nums) - 1, condition)
+
 
 def first_and_last_position(nums, target):
     return first_position(nums, target), last_position(nums, target)
+
 
 nums = [8, 8, 6, 6, 6, 6, 6, 6, 3, 2, 2, 2, 0, 0, 0]
 target = 6
