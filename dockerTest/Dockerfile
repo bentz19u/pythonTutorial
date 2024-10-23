@@ -1,7 +1,7 @@
 FROM python:3.13
 
-ADD docker-test.py .
+ADD docker_test.py .
 
 RUN pip install scikit-learn
 
-CMD ["python", "./docker-test.py"]
+CMD ["python", "./docker_test.py"]
