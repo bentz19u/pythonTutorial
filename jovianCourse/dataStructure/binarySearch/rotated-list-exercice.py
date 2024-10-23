@@ -15,13 +15,13 @@ def binary_search(lo, hi, condition):
             hi = mid - 1
         else:
             lo = mid + 1
-    return -1
+    return 0
 
 
-def find_number_rotation(nums):
+def count_rotations(nums):
     # we cannot define any number of rotation if there is no element or only one
     if len(nums) in [0, 1]:
-        return -1
+        return 0
 
     # edge case when the array has not been rotated
     if nums[0] < nums[len(nums) - 1]:
@@ -37,8 +37,8 @@ def find_number_rotation(nums):
 
     result = binary_search(0, len(nums) - 1, condition)
     # error
-    if (result == -1):
-        return -1
+    if result == 0:
+        return 0
     else:
         return result + 1  # index start at 0
 
@@ -49,7 +49,7 @@ is_all_tests_succeed = True
 time_to_process = 0
 
 for test in rotated_tests:
-    result = evaluate_test_case(find_number_rotation, test)
+    result = evaluate_test_case(count_rotations, test)
     time_to_process += result[2]
 
     # index 1 has a boolean if the test worked or not

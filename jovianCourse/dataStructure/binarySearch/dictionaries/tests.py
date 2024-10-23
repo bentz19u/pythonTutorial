@@ -29,6 +29,6 @@ rotated_tests = [
     {'input': {'nums': [4, 6, 11, 24, 30, 35, 40, 45]}, 'output': 0},
     {'input': {'nums': [45, 4, 6, 11, 24, 30, 35, 40]}, 'output': 1},
     {'input': {'nums': [6, 11, 24, 30, 35, 40, 45, 4]}, 'output': 7},
-    {'input': {'nums': []}, 'output': -1},
-    {'input': {'nums': [4]}, 'output': -1},
+    {'input': {'nums': []}, 'output': 0},
+    {'input': {'nums': [4]}, 'output': 0},
 ]
