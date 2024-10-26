@@ -27,3 +27,14 @@ print(tree.get_tree_height())
 # finding the size of a tree
 # total number of nodes including the root and leaf nodes
 print(tree.get_tree_size())
+
+# A binary search tree or BST is a binary tree that satisfies the following conditions:
+#     The left subtree of any node only contains nodes with keys less than the node's key
+#     The right subtree of any node only contains nodes with keys greater than the node's key
+is_bst = tree.is_bst()
+print(is_bst)
+
+# testing new tree of names
+tree2 = TreeNode.parse_tuple((('caesar', 'daniel', 'eric')  , 'john', ('pluto', 'valerie', 'zachary')))
+is_bst = tree2.is_bst()
+print(is_bst)

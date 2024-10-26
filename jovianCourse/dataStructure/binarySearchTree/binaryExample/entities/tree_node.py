@@ -48,6 +48,24 @@ class TreeNode:
         print(space * level + str(self.key))
         TreeNode.display_keys(self.left, space, level + 1)
 
+    def is_bst(self):
+        if self is None:
+            return True, None, None
+
+        is_bst_l, min_l, max_l = TreeNode.is_bst(self.left)
+        is_bst_r, min_r, max_r = TreeNode.is_bst(self.right)
+
+        is_bst_node = (is_bst_l and is_bst_r and
+                       (max_l is None or self.key > max_l) and
+                       (min_r is None or self.key < min_r))
+
+        min_key = min(TreeNode.remove_none([min_l, self.key, min_r]))
+        max_key = max(TreeNode.remove_none([max_l, self.key, max_r]))
+
+        # print(self.key, min_key, max_key, is_bst_node)
+
+        return is_bst_node, min_key, max_key
+
     def to_tuple(self):
         if self is None:
             return None
@@ -72,3 +90,7 @@ class TreeNode:
         else:
             node = TreeNode(data)
         return node
+
+    @staticmethod
+    def remove_none(nums):
+        return [x for x in nums if x is not None]
