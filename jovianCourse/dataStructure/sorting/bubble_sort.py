@@ -1,7 +1,7 @@
 from jovian.pythondsa import evaluate_test_case
 from dictionnaries.tests import tests, test, large_test
 
-# write a function to sort a list of numbers in increasing order.
+# write a function to buble sorting of a list of numbers in increasing order.
 # example numbers = [4, 2, 6, 3, 4, 6, 2, 1]
 # expected sorted array [1, 2, 2, 3, 4, 4, 6, 6]
 
