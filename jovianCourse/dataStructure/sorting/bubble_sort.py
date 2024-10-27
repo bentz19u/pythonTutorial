@@ -40,3 +40,5 @@ print(f"ALL TESTS SUCCEED? {is_all_tests_succeed}, time to process {time_to_proc
 # testing the big test, commented because it's too long, roughly 8 sec
 # result = evaluate_test_case(bubble_sort, large_test)
 # print(result)
+
+# complexity of O(n2)
