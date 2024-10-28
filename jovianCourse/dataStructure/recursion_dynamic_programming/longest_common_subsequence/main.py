@@ -29,12 +29,36 @@ def length_common_subsequence(seq1, seq2, seq1_index=0, seq2_index=0, match_foun
 
     return match_found
 
+# faster version because it saves the result and re-use it when we bump into the same pair
+def lcq_memoized(seq1, seq2):
+    memo = {}
+
+    def recurse(seq1_index, seq2_index):
+        key = seq1_index, seq2_index
+
+        # we are using a pre-calculated pair result if it exists
+        if key in memo:
+            return memo[key]
+
+        if seq1_index == len(seq1) or seq2_index == len(seq2):
+            memo[key] = 0
+        elif seq1[seq1_index] == seq2[seq2_index]:
+            memo[key] = 1 + recurse(seq1_index + 1, seq2_index + 1)
+        else:
+            first_match_found = length_common_subsequence(seq1, seq2, seq1_index + 1, seq2_index, match_found)
+            second_match_found = length_common_subsequence(seq1, seq2, seq1_index, seq2_index + 1, match_found)
+            memo[key] = max(first_match_found, second_match_found)
+
+        return memo[key]
+
+    return recurse(0, 0)
+
 
 is_all_tests_succeed = True
 time_to_process = 0
 
 for test in tests:
-    result = evaluate_test_case(length_common_subsequence, test)
+    result = evaluate_test_case(lcq_memoized, test)
     time_to_process += result[2]
 
     # index 1 has a boolean if the test worked or not
