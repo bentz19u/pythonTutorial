@@ -45,8 +45,8 @@ def lcq_memoized(seq1, seq2):
         elif seq1[seq1_index] == seq2[seq2_index]:
             memo[key] = 1 + recurse(seq1_index + 1, seq2_index + 1)
         else:
-            first_match_found = length_common_subsequence(seq1, seq2, seq1_index + 1, seq2_index, match_found)
-            second_match_found = length_common_subsequence(seq1, seq2, seq1_index, seq2_index + 1, match_found)
+            first_match_found = recurse(seq1_index + 1, seq2_index)
+            second_match_found = recurse(seq1_index, seq2_index + 1)
             memo[key] = max(first_match_found, second_match_found)
 
         return memo[key]
