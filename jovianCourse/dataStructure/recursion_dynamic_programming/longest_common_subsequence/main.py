@@ -29,6 +29,7 @@ def length_common_subsequence(seq1, seq2, seq1_index=0, seq2_index=0, match_foun
 
     return match_found
 
+
 # faster version because it saves the result and re-use it when we bump into the same pair
 def lcq_memoized(seq1, seq2):
     memo = {}
@@ -54,11 +55,28 @@ def lcq_memoized(seq1, seq2):
     return recurse(0, 0)
 
 
+# trying with dynamic programming
+def lcq_dynamic_prog(seq1, seq2):
+    seq1_len, seq2_len = len(seq1), len(seq2)
+
+    # creating an 2-dimensional list for each pair of keys (one key per seq)
+    # first row and column will always be full of 0
+    result_table = [[0 for _ in range(seq2_len+1)] for _ in range(seq1_len+1)]
+    for seq1_index in range(seq1_len):
+        for seq2_index in range(seq2_len):
+            if seq1[seq1_index] == seq2[seq2_index]:
+                result_table[seq1_index + 1][seq2_index + 1] = 1 + result_table[seq1_index][seq2_index]
+            else:
+                result_table[seq1_index + 1][seq2_index + 1] = max(result_table[seq1_index][seq2_index + 1], result_table[seq1_index + 1][seq2_index])
+
+    # return last raw and last column
+    return result_table[-1][-1]
+
 is_all_tests_succeed = True
 time_to_process = 0
 
 for test in tests:
-    result = evaluate_test_case(lcq_memoized, test)
+    result = evaluate_test_case(lcq_dynamic_prog, test)
     time_to_process += result[2]
 
     # index 1 has a boolean if the test worked or not
@@ -67,4 +85,6 @@ for test in tests:
 
 print(f"ALL TESTS SUCCEED? {is_all_tests_succeed}, time to process {time_to_process}")
 
-# time complexity of O(2^m+n)
+# time complexity of O(2^m+n) for length_common_subsequence
+# time complexity of O(m*n) for lcq_memoized
+# time complexity of O(m*n) for lcq_dynamic_prog but faster
