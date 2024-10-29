@@ -9,8 +9,3 @@ tests = [{'input': {'seq1': 'serendipitous', 'seq2': 'precipitation'}, 'output':
          {'input': {'seq1': '', 'seq2': ''}, 'output': 0},
          {'input': {'seq1': 'abcdef', 'seq2': 'badcfe'}, 'output': 3},
          ]
-
-# large_test = {
-#     'input': {'nums': list(range(10000, 0, -1))},
-#     'output': list(range(1, 10001))
-# }
