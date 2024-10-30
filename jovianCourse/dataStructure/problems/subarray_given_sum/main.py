@@ -26,11 +26,14 @@ Possible cases
 def get_sub_array_given_sum_brute_force(nums, target):
     length = len(nums)
     for i in range(0, length):
-        for j in range(i + 1, length + 1):
-            if sum(nums[i:j]) == target:
-                # -1 because nums[i:j] exclude actually j, so we are calculating the index before
-                return [i, j - 1]
-            if sum(nums[i:j]) > target:
+        sum_numbers = nums[i]
+        if sum_numbers == target:
+            return [i, i]
+        for j in range(i + 1, length):
+            sum_numbers += nums[j]
+            if sum_numbers == target:
+                return [i, j]
+            if sum_numbers > target:
                 break
 
     # not found
@@ -39,11 +42,47 @@ def get_sub_array_given_sum_brute_force(nums, target):
 
 # result = evaluate_test_case(get_sub_array_given_sum_brute_force, test)
 
+# is_all_tests_succeed = True
+# time_to_process = 0
+#
+# for test in tests:
+#     result = evaluate_test_case(get_sub_array_given_sum_brute_force, test)
+#     time_to_process += result[2]
+#
+#     # index 1 has a boolean if the test worked or not
+#     if not result[1]:
+#         is_all_tests_succeed = False
+#
+# print(f"ALL TESTS SUCCEED? {is_all_tests_succeed}, time to process {time_to_process}")
+# Complexity of O(n^2)
+
+def get_sub_array_given_sum_sliding_method(nums, target):
+    length = len(nums)
+    idx1, idx2, sum_numbers = 0, 0, 0
+    while idx1 < length and idx2 < length + 1:
+        # we found it
+        if sum_numbers == target:
+            return [idx1, idx2 - 1]
+
+        # sum too low, we move the idx2 to continue the sum
+        if sum_numbers < target:
+            if idx2 < length:
+                sum_numbers += nums[idx2]
+            idx2 += 1
+
+        # sum too high, which means the first index should be increase
+        # and sum removed
+        elif sum_numbers > target:
+            sum_numbers -= nums[idx1]
+            idx1 += 1
+
+    return [None, None]
+
 is_all_tests_succeed = True
 time_to_process = 0
 
 for test in tests:
-    result = evaluate_test_case(get_sub_array_given_sum_brute_force, test)
+    result = evaluate_test_case(get_sub_array_given_sum_sliding_method, test)
     time_to_process += result[2]
 
     # index 1 has a boolean if the test worked or not
@@ -51,3 +90,4 @@ for test in tests:
         is_all_tests_succeed = False
 
 print(f"ALL TESTS SUCCEED? {is_all_tests_succeed}, time to process {time_to_process}")
+# Complexity of O(n)
