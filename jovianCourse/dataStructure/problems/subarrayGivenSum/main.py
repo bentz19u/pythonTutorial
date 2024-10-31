@@ -2,7 +2,7 @@ from jovian.pythondsa import evaluate_test_case
 
 from dictionnaries.tests import test, tests
 
-
+# find a continuous subarray of the list which adds up to a given sum.
 # example of what kind of functions we are expecting (input and output)
 def get_sub_array_given_sum(nums, target):
     # correct result for test case 1
@@ -42,18 +42,18 @@ def get_sub_array_given_sum_brute_force(nums, target):
 
 # result = evaluate_test_case(get_sub_array_given_sum_brute_force, test)
 
-# is_all_tests_succeed = True
-# time_to_process = 0
-#
-# for test in tests:
-#     result = evaluate_test_case(get_sub_array_given_sum_brute_force, test)
-#     time_to_process += result[2]
-#
-#     # index 1 has a boolean if the test worked or not
-#     if not result[1]:
-#         is_all_tests_succeed = False
-#
-# print(f"ALL TESTS SUCCEED? {is_all_tests_succeed}, time to process {time_to_process}")
+is_all_tests_succeed = True
+time_to_process = 0
+
+for test in tests:
+    result = evaluate_test_case(get_sub_array_given_sum_brute_force, test)
+    time_to_process += result[2]
+
+    # index 1 has a boolean if the test worked or not
+    if not result[1]:
+        is_all_tests_succeed = False
+
+print(f"ALL TESTS SUCCEED? {is_all_tests_succeed}, time to process {time_to_process}")
 # Complexity of O(n^2)
 
 def get_sub_array_given_sum_sliding_method(nums, target):
