@@ -3,7 +3,7 @@ test = {
         'root': {
             'info': 3,
             'left': {
-                'info': 3,
+                'info': 2,
                 'left': {
                     'info': 1,
                     'left': None,
