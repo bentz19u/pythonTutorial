@@ -1,6 +1,6 @@
 from jovian.pythondsa import evaluate_test_case
 
-from dictionnaries.tests import test, tests
+from hackerRank.countTriplets.tests import tests
 
 
 # You are given an array, and you need to find number of triplets of indices (i,j,k)

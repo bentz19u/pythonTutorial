@@ -1,6 +1,6 @@
 from jovian.pythondsa import evaluate_test_case
 
-from dictionnaries.tests import test, tests
+from hackerRank.mergeSortCountingInversions.tests import tests
 
 
 # In an array, arr, the elements at indices and (where i < j) form an inversion if arr[i] > arr[j].
