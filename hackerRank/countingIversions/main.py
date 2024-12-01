@@ -75,7 +75,7 @@ def merge(left, right):
 def countInversions(arr):
     def recursive(arr):
         if len(arr) <= 1:
-            return arr, 0
+            return arr
 
         mid = len(arr) // 2
 
