@@ -1,7 +1,3 @@
-from jovian.pythondsa import evaluate_test_case
-
-# from tests import test, tests
-
 # Each time Sunny and Johnny take a trip to the Ice Cream Parlor,
 # they pool their money to buy ice cream. On any given day,
 # the parlor offers a line of flavors. Each flavor has a cost associated with it.
