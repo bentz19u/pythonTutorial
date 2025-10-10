@@ -64,19 +64,14 @@ def isValid_old(s: str) -> bool:
 # this time, let's used a stack
 def isValid(s: str) -> bool:
     stack = []
-    opening_char = ['(', '[', '{']
+    pairs = {')': '(', ']': '[', '}': '{'}
 
     for char in s:
-        if char in opening_char:
-            stack.append(char)
+        if char in pairs:
+            if not stack or stack.pop() != pairs[char]:
+                return False
         else:
-            if len(stack) == 0:
-                return False
-
-            # get last item inserted in stack
-            last_char = stack.pop()
-            if not isValidOppositeSymbol(last_char, char):
-                return False
+            stack.append(char)
 
     return not stack
 
