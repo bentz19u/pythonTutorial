@@ -32,7 +32,7 @@ def isValidOppositeSymbol(first: str, second: str) -> bool:
     return False
 
 
-def isValid(s: str) -> bool:
+def isValid_old(s: str) -> bool:
     # we need to check the next position (direct closing) or the opposite position
     # if both are false, the string is invalid
     # once we reach half the string, we should know if it is valid or not
@@ -61,18 +61,38 @@ def isValid(s: str) -> bool:
     return True
 
 
-result = evaluate_test_case(isValid, test)
-print(result)
+# this time, let's used a stack
+def isValid(s: str) -> bool:
+    stack = []
+    opening_char = ['(', '[', '{']
 
-# is_all_tests_succeed = True
-# time_to_process = 0
-#
-# for test in tests:
-#     result = evaluate_test_case(isValid, test)
-#     time_to_process += result[2]
-#
-#     # index 1 has a boolean if the test worked or not
-#     if not result[1]:
-#         is_all_tests_succeed = False
-#
-# print(f"ALL TESTS SUCCEED? {is_all_tests_succeed}, time to process {time_to_process}")
+    for char in s:
+        if char in opening_char:
+            stack.append(char)
+        else:
+            if len(stack) == 0:
+                return False
+
+            # get last item inserted in stack
+            last_char = stack.pop()
+            if not isValidOppositeSymbol(last_char, char):
+                return False
+
+    return not stack
+
+
+# result = evaluate_test_case(isValid, test)
+# print(result)
+
+is_all_tests_succeed = True
+time_to_process = 0
+
+for test in tests:
+    result = evaluate_test_case(isValid, test)
+    time_to_process += result[2]
+
+    # index 1 has a boolean if the test worked or not
+    if not result[1]:
+        is_all_tests_succeed = False
+
+print(f"ALL TESTS SUCCEED? {is_all_tests_succeed}, time to process {time_to_process}")
