@@ -24,12 +24,12 @@ Possible cases
 
 # first version, it can be improved easily
 def removeDuplicates(nums: List[int]) -> int:
-    numbers_found = []
+    numbers_found = {}
     index_to_delete = []
 
     for index, num in enumerate(nums):
         if num not in numbers_found:
-            numbers_found.append(num)
+            numbers_found[num] = num
         else:
             index_to_delete.append(index)
 
