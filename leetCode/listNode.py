@@ -14,3 +14,11 @@ class ListNode:
             current.next = ListNode(val)
             current = current.next
         return head
+
+    @staticmethod
+    def print_linked_list(head):
+        """Print all values from head to end."""
+        current = head
+        while current:
+            print(current.val, end=" -> " if current.next else "\n")
+            current = current.next
