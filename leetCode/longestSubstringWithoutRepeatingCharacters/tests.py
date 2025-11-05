@@ -1,0 +1,7 @@
+test = {'input': {'s': "abcabcbb"}, 'output': 3}
+
+tests = [{'input': {'s': "abcabcbb"}, 'output': 3},
+         {'input': {'s': "bbbbb"}, 'output': 1},
+         {'input': {'s': "pwwkew"}, 'output': 3},
+         {'input': {'s': ""}, 'output': 0}
+         ]
