@@ -14,7 +14,7 @@ Possible cases
 
 
 # not optimal, kinda brute forced
-def lengthOfLongestSubstring(s: str) -> int:
+def lengthOfLongestSubstringOld(s: str) -> int:
     my_set = set()
     idx1, idx2, max_idx = 0, 1, len(s) - 1
 
@@ -46,18 +46,54 @@ def lengthOfLongestSubstring(s: str) -> int:
     return max_len
 
 
-# result = evaluate_test_case(lengthOfLongestSubstring, test)
-# print(result)
+def lengthOfLongestSubstring(s: str) -> int:
+    my_set = set()
+    idx1, idx2, max_idx = 0, 1, len(s) - 1
 
-is_all_tests_succeed = True
-time_to_process = 0
+    # array empty
+    if max_idx < 0:
+        return 0
 
-for test in tests:
-    result = evaluate_test_case(lengthOfLongestSubstring, test)
-    time_to_process += result[2]
+    # one char only
+    if max_idx == 0:
+        return 1
 
-    # index 1 has a boolean if the test worked or not
-    if not result[1]:
-        is_all_tests_succeed = False
+    current_len, max_len = 1, 1
+    my_set.add(s[idx1])
+    while idx2 <= max_idx:
+        # char is already in list, we reset
+        if s[idx2] in my_set:
+            idx1 += 1
+            idx2 = idx1 + 1
+            current_len = 1
 
-print(f"ALL TESTS SUCCEED? {is_all_tests_succeed}, time to process {time_to_process}")
+            my_set.clear()
+            my_set.add(s[idx1])
+            continue
+
+        # char is not in the list, we continue
+        my_set.add(s[idx2])
+        idx2 += 1
+
+        current_len += 1
+        if current_len > max_len:
+            max_len = current_len
+
+    return max_len
+
+
+result = evaluate_test_case(lengthOfLongestSubstring, test)
+print(result)
+
+# is_all_tests_succeed = True
+# time_to_process = 0
+#
+# for test in tests:
+#     result = evaluate_test_case(lengthOfLongestSubstring, test)
+#     time_to_process += result[2]
+#
+#     # index 1 has a boolean if the test worked or not
+#     if not result[1]:
+#         is_all_tests_succeed = False
+#
+# print(f"ALL TESTS SUCCEED? {is_all_tests_succeed}, time to process {time_to_process}")
