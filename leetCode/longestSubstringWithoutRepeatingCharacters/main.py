@@ -46,7 +46,7 @@ def lengthOfLongestSubstringOld(s: str) -> int:
     return max_len
 
 
-def lengthOfLongestSubstring(s: str) -> int:
+def lengthOfLongestSubstringBetterVersion(s: str) -> int:
     my_set = set()
     idx1, idx2, max_idx = 0, 1, len(s) - 1
 
@@ -78,6 +78,25 @@ def lengthOfLongestSubstring(s: str) -> int:
         current_len += 1
         if current_len > max_len:
             max_len = current_len
+
+    return max_len
+
+
+# optimal version
+def lengthOfLongestSubstring(s: str) -> int:
+    seen = set()
+    left = 0
+    max_len = 0
+
+    for right in range(len(s)):
+        # if we find a duplicate, move left until it’s gone
+        while s[right] in seen:
+            seen.remove(s[left])
+            left += 1
+
+        # add the current char and update max length
+        seen.add(s[right])
+        max_len = max(max_len, right - left + 1)
 
     return max_len
 
