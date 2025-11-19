@@ -13,8 +13,6 @@ Possible cases
 4. long string
 """
 
-memo = {}
-
 
 def is_palindrome(s: str, idx1: int, idx2: int) -> bool:
     if s == '':
@@ -31,7 +29,11 @@ def is_palindrome(s: str, idx1: int, idx2: int) -> bool:
     return True
 
 
-def longestPalindrome(s: str, idx1=None, idx2=None) -> str:
+# old version
+def longestPalindromeOld(s: str, idx1=None, idx2=None, memo=None) -> str:
+    if memo is None:
+        memo = {}
+
     if idx1 is None:
         idx1, idx2 = 0, len(s) - 1
 
@@ -44,8 +46,8 @@ def longestPalindrome(s: str, idx1=None, idx2=None) -> str:
         memo[key] = s[idx1:idx2 + 1]
         return memo[key]
 
-    res1 = longestPalindrome(s, idx1, idx2 - 1)
-    res2 = longestPalindrome(s, idx1 + 1, idx2)
+    res1 = longestPalindrome(s, idx1, idx2 - 1, memo)
+    res2 = longestPalindrome(s, idx1 + 1, idx2, memo)
 
     final_res = res1 if len(res1) > len(res2) else res2
 
@@ -54,18 +56,54 @@ def longestPalindrome(s: str, idx1=None, idx2=None) -> str:
     return final_res
 
 
-result = evaluate_test_case(longestPalindrome, test)
-print(result)
+def longestPalindrome(s: str):
+    if not s:
+        return ''
 
-# is_all_tests_succeed = True
-# time_to_process = 0
-#
-# for test in tests:
-#     result = evaluate_test_case(longestPalindrome, test)
-#     time_to_process += result[2]
-#
-#     # index 1 has a boolean if the test worked or not
-#     if not result[1]:
-#         is_all_tests_succeed = False
-#
-# print(f"ALL TESTS SUCCEED? {is_all_tests_succeed}, time to process {time_to_process}")
+    def isPalindromeFromCenter(s, left, right):
+        while left >= 0 and right < len(s) and s[left] == s[right]:
+            left -= 1
+            right += 1
+
+        return left + 1, right - 1
+
+    total = start = end = 0
+
+    for i in range(len(s)):
+        # check first if center is the char
+        left1, right1 = isPalindromeFromCenter(s, i, i)
+
+        # then check if center if between the char and the next one
+        left2, right2 = isPalindromeFromCenter(s, i, i + 1)
+
+        lenght1 = right1 - left1
+        lenght2 = right2 - left2
+
+        if lenght1 > total:
+            total = lenght1
+            start = left1
+            end = right1
+
+        if lenght2 > total:
+            total = lenght2
+            start = left2
+            end = right2
+
+    return s[start:end + 1]
+
+
+# result = evaluate_test_case(longestPalindrome, test)
+# print(result)
+
+is_all_tests_succeed = True
+time_to_process = 0
+
+for test in tests:
+    result = evaluate_test_case(longestPalindrome, test)
+    time_to_process += result[2]
+
+    # index 1 has a boolean if the test worked or not
+    if not result[1]:
+        is_all_tests_succeed = False
+
+print(f"ALL TESTS SUCCEED? {is_all_tests_succeed}, time to process {time_to_process}")
