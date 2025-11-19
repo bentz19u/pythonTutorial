@@ -16,7 +16,7 @@ Possible cases
 
 
 # easiest solution would be to sort the array first and then check both end of it one by one
-def two_sum(nums, target):
+def two_sum_old(nums, target):
     index_map = {}
 
     for idx, num in enumerate(nums):
@@ -44,6 +44,17 @@ def two_sum(nums, target):
             idx2 -= 1
         else:
             idx1 += 1
+
+
+def two_sum(nums, target):
+    index_map = {}
+
+    for idx, num in enumerate(nums):
+        difference = target - num
+        if difference in index_map:
+            return [index_map[difference], idx]
+
+        index_map[num] = idx
 
 
 # result = evaluate_test_case(two_sum, test)
