@@ -19,7 +19,7 @@ Possible cases
 """
 
 
-def convert(s: str, numRows: int) -> str:
+def convert_old(s: str, numRows: int) -> str:
     if numRows == 1 or numRows >= len(s):
         return s
 
@@ -74,18 +74,45 @@ def convert(s: str, numRows: int) -> str:
     return output
 
 
-result = evaluate_test_case(convert, test)
-print(result)
+# optimized version, I keep the value in a array of strings instead of a matrix(dict)
+def convert(s: str, numRows: int) -> str:
+    rows = [''] * numRows
 
-# is_all_tests_succeed = True
-# time_to_process = 0
-#
-# for test in tests:
-#     result = evaluate_test_case(convert, test)
-#     time_to_process += result[2]
-#
-#     # index 1 has a boolean if the test worked or not
-#     if not result[1]:
-#         is_all_tests_succeed = False
-#
-# print(f"ALL TESTS SUCCEED? {is_all_tests_succeed}, time to process {time_to_process}")
+    current, height = 0, 0
+    pattern = 'down'
+    while current <= len(s) - 1:
+        rows[height] += s[current]
+        current += 1
+
+        if numRows == 1:
+            continue
+
+        if height == numRows - 1:
+            pattern = 'up'
+        elif height == 0:
+            pattern = 'down'
+
+        height += -1 if pattern == 'up' else 1
+
+    output = ''
+    for row in rows:
+        output += row
+
+    return output
+
+
+# result = evaluate_test_case(convert, test)
+# print(result)
+
+is_all_tests_succeed = True
+time_to_process = 0
+
+for test in tests:
+    result = evaluate_test_case(convert, test)
+    time_to_process += result[2]
+
+    # index 1 has a boolean if the test worked or not
+    if not result[1]:
+        is_all_tests_succeed = False
+
+print(f"ALL TESTS SUCCEED? {is_all_tests_succeed}, time to process {time_to_process}")

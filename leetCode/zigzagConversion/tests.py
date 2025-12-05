@@ -1,4 +1,4 @@
-test = {'input': {'s': "ABCD", 'numRows': 1}, 'output': 'ABCD'}
+test = {'input': {'s': "PAYPALISHIRING", 'numRows': 3}, 'output': 'PAHNAPLSIIGYIR'}
 
 tests = [{'input': {'s': "PAYPALISHIRING", 'numRows': 3}, 'output': 'PAHNAPLSIIGYIR'},
          {'input': {'s': "PAYPALISHIRING", 'numRows': 4}, 'output': 'PINALSIGYAHRPI'},
