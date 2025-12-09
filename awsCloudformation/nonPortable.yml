@@ -1,0 +1,12 @@
+Resources:
+  Bucket:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      # hardcoded so it will either work once or never (if it already exist)
+      BucketName: 'accatpics24321122432'
+  Instance:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      InstanceType: 't2.micro'
+      # doesnt work in another region
+      ImageId: 'ami-068c0051b15cdb816'
